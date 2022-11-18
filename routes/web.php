@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FuncionarioController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,8 +24,8 @@ Route::prefix('funcionario')->group(function(){
     Route::post('',[FuncionarioController::class, 'store'])->name('funcionario.store');
     Route::get('/{id}',[FuncionarioController::class, 'show'])->name('funcionario.show');
     Route::get('/{id}/edit',[FuncionarioController::class, 'edit'])->name('funcionario.edit');
-    Route::get('/{id}/update',[FuncionarioController::class, 'update'])->name('funcionario.update');
-    Route::get('/{id}/delete',[FuncionarioController::class, 'delete'])->name('funcionario.delete');
+    Route::post('/{id}/update',[FuncionarioController::class, 'update'])->name('funcionario.update');
+    Route::get('/{id}/delete',[FuncionarioController::class, 'destroy'])->name('funcionario.delete');
 
 
 

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Funcionario;
 use Illuminate\Http\Request;
 
 class FuncionarioController extends Controller
@@ -13,7 +13,8 @@ class FuncionarioController extends Controller
      */
     public function index()
     {
-        //
+        $funcionarios = Funcionario::all();
+        return view('funcionario.index',['funcionarios' => $funcionarios]);
     }
 
     /**
@@ -56,7 +57,8 @@ class FuncionarioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        return view('funcionario.edit',['funcionario'=>$funcionario]);
     }
 
     /**
@@ -68,7 +70,16 @@ class FuncionarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+
+        $funcionario->fill($request->toArray()//retorna apenas a array dos dados do banco 
+    );
+
+        $funcionario->save();
+        
+        //fill()Só funciona se os name dos inputs forem iguais os do banco de dados
+
+        return redirect()->route('funcionario.index');
     }
 
     /**
@@ -79,6 +90,8 @@ class FuncionarioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $funcionario = Funcionario::find($id);
+        $funcionario->delete();
+        return redirect()->route('funcionario.index');
     }
 }
